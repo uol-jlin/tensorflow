@@ -49,3 +49,24 @@ model = tf.keras.models.Sequential([
     # Only 1 output neuron. It will contain a value from 0-1 where 0 for 1 class ('horses') and 1 for the other ('humans')
     tf.keras.layers.Dense(1, activation='sigmoid')
 ])
+
+model.summary()
+
+from tensorflow.keras.optimizers import RMSprop
+
+model.compile(loss='binary_crossentropy',
+              optimizer=RMSprop(learning_rate=0.001),
+              metrics=['accuracy'])
+
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
+
+# All images will be rescaled by 1./255
+train_datagen = ImageDataGenerator(rescale=1/255)
+
+# Flow training images in batches of 128 using train_datagen generator
+train_generator = train_datagen.flow_from_directory(
+        './horse-or-human/',  # This is the source directory for training images
+        target_size=(300, 300),  # All images will be resized to 300x300
+        batch_size=128,
+        # Since we use binary_crossentropy loss, we need binary labels
+        class_mode='binary')
