@@ -16,3 +16,15 @@ plt.show()
 print("\nSample sad image:")
 plt.imshow(load_img(f"{os.path.join(sad_dir, os.listdir(sad_dir)[0])}"))
 plt.show()
+
+from tensorflow.keras.preprocessing.image import img_to_array
+
+sample_image = load_img(f"{os.path.join(happy_dir, os.listdir(happy_dir)[0])}")
+sample_array = img_to_array(sample_image)
+print(f"Each image has shape: {sample_array.shape}")
+print(f"The maximum pixel value used is: {np.max(sample_array)}")
+
+"""
+Each image has shape: (150, 150, 3)
+The maximum pixel value used is: 255.0
+"""
