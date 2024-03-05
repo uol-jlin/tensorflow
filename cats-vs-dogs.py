@@ -61,3 +61,8 @@ try:
 except FileExistsError:
   print("You should not be seeing this since the upper directory is removed beforehand")
     
+# Test create_train_val_dirs function
+for rootdir, dirs, files in os.walk(root_dir):
+    for subdir in dirs:
+        print(os.path.join(rootdir, subdir))
+        
