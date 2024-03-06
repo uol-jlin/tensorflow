@@ -65,4 +65,37 @@ except FileExistsError:
 for rootdir, dirs, files in os.walk(root_dir):
     for subdir in dirs:
         print(os.path.join(rootdir, subdir))
-        
+
+def split_data(SOURCE_DIR, TRAINING_DIR, VALIDATION_DIR, SPLIT_SIZE):
+  """
+  Splits the data into train and test sets
+  
+  Args:
+    SOURCE_DIR (string): directory path containing the images
+    TRAINING_DIR (string): directory path to be used for training
+    VALIDATION_DIR (string): directory path to be used for validation
+    SPLIT_SIZE (float): proportion of the dataset to be used for training
+    
+  Returns:
+    None
+  """
+  
+  source_files = []
+  for file in os.listdir(SOURCE_DIR):
+    if os.path.getsize(os.path.join(SOURCE_DIR, file)) == 0:
+      print(file + " is zero length, so ignoring.")
+    else:
+      source_files.append(file)
+  
+  sources_files = random.sample(source_files, len(source_files))
+  
+  split_index = int(len(source_files) * SPLIT_SIZE)
+  
+  training_set = source_files[:split_index]
+  validation_set = source_files[split_index:]
+  
+  for file_name in training_set:
+    copyfile(os.path.join(SOURCE_DIR, file_name), os.path.join(TRAINING_DIR, file_name))
+    
+  for file_name in validation_set:
+    copyfile(os.path.join(SOURCE_DIR, file_name), os.path.join(VALIDATION_DIR, file_name))
