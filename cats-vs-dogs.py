@@ -151,3 +151,11 @@ def create_model():
                 metrics=['accuracy']) 
 
   return model
+
+model = create_model()
+
+# Train the model
+history = model.fit(train_generator,
+                    epochs=15,
+                    verbose=1,
+                    validation_data=validation_generator)
