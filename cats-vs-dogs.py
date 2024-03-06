@@ -112,14 +112,14 @@ def train_val_generators(TRAINING_DIR, VALIDATION_DIR):
     train_generator, validation_generator - tuple containing the generators
   """
 
-  train_datagen = ImageDataGenerator()  
+  train_datagen = ImageDataGenerator(rescale=1./255)  
 
   train_generator = train_datagen.flow_from_directory(directory=TRAINING_DIR,
                                                       batch_size=10,
                                                       class_mode='binary',
                                                       target_size=(150, 150))
 
-  validation_datagen = ImageDataGenerator() 
+  validation_datagen = ImageDataGenerator(rescale=1./255) 
 
   validation_generator = validation_datagen.flow_from_directory(directory=VALIDATION_DIR,
                                                                 batch_size=10,
