@@ -110,7 +110,7 @@ def train_val_generators(TRAINING_DIR, VALIDATION_DIR):
                                      fill_mode="nearest")
 
   train_generator = train_datagen.flow_from_directory(directory=TRAINING_DIR,
-                                                      batch_size=50,
+                                                      batch_size=45,
                                                       class_mode='binary',
                                                       target_size=(150, 150))
 
@@ -119,7 +119,7 @@ def train_val_generators(TRAINING_DIR, VALIDATION_DIR):
 
   # Pass in the appropriate arguments to the flow_from_directory method
   validation_generator = validation_datagen.flow_from_directory(directory=VALIDATION_DIR,
-                                                                batch_size=50,
+                                                                batch_size=5,
                                                                 class_mode='binary',
                                                                 target_size=(150, 150))
     
