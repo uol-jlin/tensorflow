@@ -86,3 +86,42 @@ def split_data(SOURCE_DIR, TRAINING_DIR, VALIDATION_DIR, SPLIT_SIZE):
     
   for file in validation_files:
     copyfile(os.path.join(SOURCE_DIR, file), os.path.join(VALIDATION_DIR, file))
+
+def train_val_generators(TRAINING_DIR, VALIDATION_DIR):
+  """
+  Creates the training and validation data generators
+  
+  Args:
+    TRAINING_DIR (string): directory path containing the training images
+    VALIDATION_DIR (string): directory path containing the testing/validation images
+    
+  Returns:
+    train_generator, validation_generator - tuple containing the generators
+  """
+
+  # Instantiate the ImageDataGenerator class 
+  train_datagen = ImageDataGenerator(rescale=1./255,
+                                     rotation_range=40,
+                                     width_shift_range=0.2,
+                                     height_shift_range=0.2,
+                                     shear_range=0.2,
+                                     zoom_range=0.2,
+                                     horizontal_flip=True,
+                                     fill_mode="nearest")
+
+  train_generator = train_datagen.flow_from_directory(directory=TRAINING_DIR,
+                                                      batch_size=50,
+                                                      class_mode='binary',
+                                                      target_size=(150, 150))
+
+  # Instantiate the ImageDataGenerator class 
+  validation_datagen =ImageDataGenerator(rescale=1./255)
+
+  # Pass in the appropriate arguments to the flow_from_directory method
+  validation_generator = validation_datagen.flow_from_directory(directory=VALIDATION_DIR,
+                                                                batch_size=50,
+                                                                class_mode='binary',
+                                                                target_size=(150, 150))
+    
+  return train_generator, validation_generator
+    
