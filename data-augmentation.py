@@ -16,3 +16,15 @@ zip_ref   = zipfile.ZipFile(local_zip, 'r')
 zip_ref.extractall('/tmp')
 zip_ref.close()
 
+source_path = '/tmp/PetImages'
+
+source_path_dogs = os.path.join(source_path, 'Dog')
+source_path_cats = os.path.join(source_path, 'Cat')
+
+# Deletes all non-image files (there are two .db files bundled into the dataset)
+!find /tmp/PetImages/ -type f ! -name "*.jpg" -exec rm {} +
+
+# os.listdir returns a list containing all files under the given path
+print(f"There are {len(os.listdir(source_path_dogs))} images of dogs.")
+print(f"There are {len(os.listdir(source_path_cats))} images of cats.")
+    
