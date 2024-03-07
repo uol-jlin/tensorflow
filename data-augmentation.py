@@ -74,7 +74,12 @@ def split_data(SOURCE_DIR, TRAINING_DIR, VALIDATION_DIR, SPLIT_SIZE):
   Returns:
     None
   """
-  source_files = [file for file in os.listdir(SOURCE_DIR) if os.path.getsize(os.path.join(SOURCE_DIR, file)) > 0]
+  source_files = []
+  for file in os.listdir(SOURCE_DIR):
+    if os.path.getsize(os.path.join(SOURCE_DIR, file)) == 0:
+      print(f'{file} is zero length, so ignoring.')
+    else: 
+      source_files.append(file)
   source_files = random.sample(source_files, len(source_files))
 
   split_index = int(len(source_files) * SPLIT_SIZE)
