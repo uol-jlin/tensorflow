@@ -60,4 +60,29 @@ try:
   create_train_val_dirs(root_path=root_dir)
 except FileExistsError:
   print("You should not be seeing this since the upper directory is removed beforehand")
+
+def split_data(SOURCE_DIR, TRAINING_DIR, VALIDATION_DIR, SPLIT_SIZE):
+  """
+  Splits the data into train and test sets
+  
+  Args:
+    SOURCE_DIR (string): directory path containing the images
+    TRAINING_DIR (string): directory path to be used for training
+    VALIDATION_DIR (string): directory path to be used for validation
+    SPLIT_SIZE (float): proportion of the dataset to be used for training
     
+  Returns:
+    None
+  """
+  source_files = [file for file in os.listdir(SOURCE_DIR) if os.path.getsize(os.path.join(SOURCE_DIR, file)) > 0]
+  source_files = random.sample(source_files, len(source_files))
+
+  split_index = int(len(source_files) * SPLIT_SIZE)
+  training_files = source_files[:split_index]
+  validation_files = source_files[split_index:]
+  
+  for file in training_files:
+    copyfile(os.path.join(SOURCE_DIR, file), os.path.join(TRAINING_DIR, file))
+    
+  for file in validation_files:
+    copyfile(os.path.join(SOURCE_DIR, file), os.path.join(VALIDATION_DIR, file))
