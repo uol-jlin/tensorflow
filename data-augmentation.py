@@ -145,3 +145,11 @@ def create_model():
     
   return model
     
+# Get the untrained model
+model = create_model()
+
+# Train the model
+history = model.fit(train_generator,
+                    epochs=15,
+                    verbose=1,
+                    validation_data=validation_generator)
