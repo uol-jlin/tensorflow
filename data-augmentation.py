@@ -28,3 +28,36 @@ source_path_cats = os.path.join(source_path, 'Cat')
 print(f"There are {len(os.listdir(source_path_dogs))} images of dogs.")
 print(f"There are {len(os.listdir(source_path_cats))} images of cats.")
     
+# Define root directory
+root_dir = '/tmp/cats-v-dogs'
+
+# Empty directory to prevent FileExistsError is the function is run several times
+if os.path.exists(root_dir):
+  shutil.rmtree(root_dir)
+
+def create_train_val_dirs(root_path):
+  """
+  Creates directories for the train and test sets
+  
+  Args:
+    root_path (string) - the base directory path to create subdirectories from
+  
+  Returns:
+    None
+  """
+
+  training_dir = os.path.join(root_path, "training")
+  validation_dir = os.path.join(root_path, "validation")
+
+  os.makedirs(training_dir)
+  os.makedirs(validation_dir)
+
+  for dir in [training_dir, validation_dir]:
+    os.makedirs(os.path.join(dir, "cats"))
+    os.makedirs(os.path.join(dir, "dogs"))
+
+try:
+  create_train_val_dirs(root_path=root_dir)
+except FileExistsError:
+  print("You should not be seeing this since the upper directory is removed beforehand")
+    
