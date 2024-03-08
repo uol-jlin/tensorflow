@@ -51,3 +51,45 @@ model.summary()
 model.compile(optimizer = RMSprop(learning_rate=0.0001), 
               loss = 'binary_crossentropy', 
               metrics = ['accuracy'])
+
+# Download the dataset
+!wget https://storage.googleapis.com/tensorflow-1-public/course2/cats_and_dogs_filtered.zip
+
+import os
+import zipfile
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
+
+# Extract the archive
+zip_ref = zipfile.ZipFile("./cats_and_dogs_filtered.zip", 'r')
+zip_ref.extractall("tmp/")
+zip_ref.close()
+
+# Define our example directories and files
+base_dir = 'tmp/cats_and_dogs_filtered'
+
+train_dir = os.path.join( base_dir, 'train')
+validation_dir = os.path.join( base_dir, 'validation')
+
+# Directory with training cat pictures
+train_cats_dir = os.path.join(train_dir, 'cats') 
+
+# Directory with training dog pictures
+train_dogs_dir = os.path.join(train_dir, 'dogs') 
+
+# Directory with validation cat pictures
+validation_cats_dir = os.path.join(validation_dir, 'cats') 
+
+# Directory with validation dog pictures
+validation_dogs_dir = os.path.join(validation_dir, 'dogs')
+
+# Add data-augmentation parameters to ImageDataGenerator
+train_datagen = ImageDataGenerator(rescale = 1./255.,
+                                   rotation_range = 40,
+                                   width_shift_range = 0.2,
+                                   height_shift_range = 0.2,
+                                   shear_range = 0.2,
+                                   zoom_range = 0.2,
+                                   horizontal_flip = True)
+
+# Validation data should not be augmented
+test_datagen = ImageDataGenerator( rescale = 1.0/255. )
