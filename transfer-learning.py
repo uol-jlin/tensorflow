@@ -105,3 +105,12 @@ validation_generator =  test_datagen.flow_from_directory( validation_dir,
                                                           batch_size  = 20,
                                                           class_mode  = 'binary', 
                                                           target_size = (150, 150))
+
+# Train the model.
+history = model.fit(
+            train_generator,
+            validation_data = validation_generator,
+            steps_per_epoch = 100,
+            epochs = 20,
+            validation_steps = 50,
+            verbose = 2)
