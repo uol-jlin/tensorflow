@@ -46,3 +46,8 @@ model = Model(pre_trained_model.input, x)
 
 # Print the model summary.
 model.summary()
+
+# Set the training parameters
+model.compile(optimizer = RMSprop(learning_rate=0.0001), 
+              loss = 'binary_crossentropy', 
+              metrics = ['accuracy'])
