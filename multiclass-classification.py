@@ -57,3 +57,6 @@ model = tf.keras.models.Sequential([
 
 # Print the model summary
 model.summary()
+
+# Set the training parameters
+model.compile(loss = 'categorical_crossentropy', optimizer='rmsprop', metrics=['accuracy'])
