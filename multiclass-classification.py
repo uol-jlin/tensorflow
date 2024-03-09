@@ -1,9 +1,3 @@
-# Download the train set
-!wget https://storage.googleapis.com/tensorflow-1-public/course2/week4/rps.zip
-    
-# Download the test set
-!wget https://storage.googleapis.com/tensorflow-1-public/course2/week4/rps-test-set.zip
-
 import zipfile
 
 # Extract the archive
