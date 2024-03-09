@@ -90,3 +90,5 @@ validation_generator = validation_datagen.flow_from_directory(
 	class_mode='categorical',
   batch_size=126
 )
+
+history = model.fit(train_generator, epochs=25, steps_per_epoch=20, validation_data = validation_generator, verbose = 1, validation_steps=3)
