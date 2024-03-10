@@ -24,3 +24,10 @@ sequences = tokenizer.texts_to_sequences(sentences)
 # Print the result
 print("\nWord Index = " , word_index)
 print("\nSequences = " , sequences)
+
+# Pad the sequences to a uniform length
+padded = pad_sequences(sequences, maxlen=5)
+
+# Print the result
+print("\nPadded Sequences:")
+print(padded)
