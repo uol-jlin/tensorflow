@@ -31,3 +31,23 @@ padded = pad_sequences(sequences, maxlen=5)
 # Print the result
 print("\nPadded Sequences:")
 print(padded)
+
+# Try with words that the tokenizer wasn't fit to
+test_data = [
+    'i really love my dog',
+    'my dog loves my manatee'
+]
+
+# Generate the sequences
+test_seq = tokenizer.texts_to_sequences(test_data)
+
+# Print the word index dictionary
+print("\nWord Index = " , word_index)
+
+# Print the sequences with OOV
+print("\nTest Sequence = ", test_seq)
+
+# Print the padded result
+padded = pad_sequences(test_seq, maxlen=10)
+print("\nPadded Test Sequence: ")
+print(padded)
