@@ -9,10 +9,6 @@ print(datastore[0])
 # Sarcastic headline
 print(datastore[20000])
 
-sentences = []
-labels = []
-urls = []
-
 # Initialize lists
 sentences = [] 
 labels = []
