@@ -24,9 +24,6 @@ def remove_stopwords(sentence):
     
     return " ".join(cleaned_sentence)
     
-# grader-required-cell
-
-# GRADED FUNCTION: parse_data_from_file
 def parse_data_from_file(filename):
     """
     Extracts sentences and labels from a CSV file
@@ -80,3 +77,28 @@ def get_padded_sequences(tokenizer, sentences):
     padded_sequences = pad_sequences(sequences, padding='post')
 
     return padded_sequences
+
+def tokenize_labels(labels):
+    """
+    Tokenizes the labels
+    
+    Args:
+        labels (list of string): labels to tokenize
+    
+    Returns:
+        label_sequences, label_word_index (list of string, dictionary): tokenized labels and the word-index
+    """    
+    # Instantiate the Tokenizer class
+    label_tokenizer = Tokenizer()
+    
+    # Fit the tokenizer to the labels
+    label_tokenizer.fit_on_texts(labels)
+
+    # Save the word index
+    label_word_index = label_tokenizer.word_index
+    
+    # Save the sequences
+    label_sequences = label_tokenizer.texts_to_sequences(labels)
+    
+    return label_sequences, label_word_index
+    
