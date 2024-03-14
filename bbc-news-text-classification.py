@@ -24,3 +24,26 @@ def remove_stopwords(sentence):
     
     return " ".join(cleaned_sentence)
     
+# grader-required-cell
+
+# GRADED FUNCTION: parse_data_from_file
+def parse_data_from_file(filename):
+    """
+    Extracts sentences and labels from a CSV file
+    
+    Args:
+        filename (string): path to the CSV file
+    
+    Returns:
+        sentences, labels (list of string, list of string): tuple containing lists of sentences and labels
+    """
+    sentences = []
+    labels = []
+    with open(filename, 'r') as csvfile:
+        reader = csv.reader(csvfile, delimiter=",")
+        next(reader, None)
+        for row in reader:
+            labels.append(remove_stopwords(row[0]))
+            sentences.append(remove_stopwords(row[1]))
+    return sentences, labels
+    
