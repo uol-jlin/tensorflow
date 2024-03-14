@@ -47,3 +47,18 @@ def parse_data_from_file(filename):
             sentences.append(remove_stopwords(row[1]))
     return sentences, labels
     
+def fit_tokenizer(sentences):
+    """
+    Instantiates the Tokenizer class
+    
+    Args:
+        sentences (list): lower-cased sentences without stopwords
+    
+    Returns:
+        tokenizer (object): an instance of the Tokenizer class containing the word-index dictionary
+    """
+    # Instantiate the Tokenizer class by passing in the oov_token argument
+    tokenizer = Tokenizer(oov_token="<OOV>")
+    tokenizer.fit_on_texts(sentences)
+    return tokenizer
+    
