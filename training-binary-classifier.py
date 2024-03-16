@@ -77,3 +77,6 @@ Trainable params: 171533 (670.05 KB)
 Non-trainable params: 0 (0.00 Byte)
 """
 
+num_epochs = 10
+
+model.fit(padded, training_labels_final, epochs=num_epochs, validation_data=(testing_padded, testing_labels_final))
