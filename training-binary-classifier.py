@@ -57,3 +57,23 @@ model = tf.keras.Sequential([
 
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 model.summary()
+
+"""
+Model: "sequential_1"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ embedding_1 (Embedding)     (None, 120, 16)           160000    
+                                                                 
+ flatten_1 (Flatten)         (None, 1920)              0         
+                                                                 
+ dense_2 (Dense)             (None, 6)                 11526     
+                                                                 
+ dense_3 (Dense)             (None, 1)                 7         
+                                                                 
+=================================================================
+Total params: 171533 (670.05 KB)
+Trainable params: 171533 (670.05 KB)
+Non-trainable params: 0 (0.00 Byte)
+"""
+
