@@ -21,3 +21,11 @@ max_length = 32
 
 # Output dimensions of the Embedding layer
 embedding_dim = 16
+
+# Split the sentences
+training_sentences = sentences[0:training_size]
+testing_sentences = sentences[training_size:]
+
+# Split the labels
+training_labels = labels[0:training_size]
+testing_labels = labels[training_size:]
