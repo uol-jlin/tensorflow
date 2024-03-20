@@ -57,3 +57,31 @@ testing_padded = pad_sequences(testing_sequences, maxlen=max_length, padding=pad
 # Convert the labels lists into numpy arrays
 training_labels = np.array(training_labels)
 testing_labels = np.array(testing_labels)
+
+import tensorflow as tf
+
+# Initialize a GlobalAveragePooling1D (GAP1D) layer
+gap1d_layer = tf.keras.layers.GlobalAveragePooling1D()
+
+# Define sample array
+sample_array = np.array([[[10,2],[1,3],[1,1]]])
+
+# Print shape and contents of sample array
+print(f'shape of sample_array = {sample_array.shape}')
+print(f'sample array: {sample_array}')
+
+# Pass the sample array to the GAP1D layer
+output = gap1d_layer(sample_array)
+
+# Print shape and contents of the GAP1D output array
+print(f'output shape of gap1d_layer: {output.shape}')
+print(f'output array of gap1d_layer: {output.numpy()}')
+
+"""
+shape of sample_array = (1, 3, 2)
+sample array: [[[10  2]
+  [ 1  3]
+  [ 1  1]]]
+output shape of gap1d_layer: (1, 2)
+output array of gap1d_layer: [[4 2]]
+"""
