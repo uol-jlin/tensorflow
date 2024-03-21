@@ -85,3 +85,18 @@ sample array: [[[10  2]
 output shape of gap1d_layer: (1, 2)
 output array of gap1d_layer: [[4 2]]
 """
+
+# Build the model
+model = tf.keras.Sequential([
+    tf.keras.layers.Embedding(vocab_size, embedding_dim, input_length=max_length),
+    tf.keras.layers.GlobalAveragePooling1D(),
+    tf.keras.layers.Dense(24, activation='relu'),
+    tf.keras.layers.Dense(1, activation='sigmoid')
+])
+
+# Print the model summary
+model.summary()
+
+# Compile the model
+model.compile(loss='binary_crossentropy',optimizer='adam',metrics=['accuracy'])
+
