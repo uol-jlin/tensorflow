@@ -100,3 +100,7 @@ model.summary()
 # Compile the model
 model.compile(loss='binary_crossentropy',optimizer='adam',metrics=['accuracy'])
 
+num_epochs = 30
+
+# Train the model
+history = model.fit(training_padded, training_labels, epochs=num_epochs, validation_data=(testing_padded, testing_labels), verbose=2)
