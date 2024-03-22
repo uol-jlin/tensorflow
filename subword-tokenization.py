@@ -164,3 +164,11 @@ Trainable params: 524237 (2.00 MB)
 Non-trainable params: 0 (0.00 Byte)
 _________________________________________________________________
 """
+
+num_epochs = 10
+
+# Set the training parameters
+model.compile(loss='binary_crossentropy',optimizer='adam',metrics=['accuracy'])
+
+# Start training
+history = model.fit(train_dataset, epochs=num_epochs, validation_data=test_dataset)
