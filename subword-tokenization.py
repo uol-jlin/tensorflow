@@ -53,3 +53,46 @@ training_sentences = []
 for s,_ in train_data:
   training_sentences.append(s.numpy().decode('utf8'))
     
+from tensorflow.keras.preprocessing.text import Tokenizer
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+
+vocab_size = 10000
+oov_tok = '<OOV>'
+
+# Initialize the Tokenizer class
+tokenizer_plaintext = Tokenizer(num_words = 10000, oov_token=oov_tok)
+
+# Generate the word index dictionary for the training sentences
+tokenizer_plaintext.fit_on_texts(training_sentences)
+
+# Generate the training sequences
+sequences = tokenizer_plaintext.texts_to_sequences(training_sentences)
+
+# Define sample sentence
+sample_string = 'TensorFlow, from basics to mastery'
+
+# Encode using the plain text tokenizer
+tokenized_string = tokenizer_plaintext.texts_to_sequences([sample_string])
+print ('Tokenized string is {}'.format(tokenized_string))
+
+# Decode and print the result
+original_string = tokenizer_plaintext.sequences_to_texts(tokenized_string)
+print ('The original string: {}'.format(original_string))
+
+"""
+Tokenized string is [[1, 37, 1, 6, 1]]
+The original string: ['<OOV> from <OOV> to <OOV>']
+"""
+
+# Encode using the subword text encoder
+tokenized_string = tokenizer_subwords.encode(sample_string)
+print ('Tokenized string is {}'.format(tokenized_string))
+
+# Decode and print the results
+original_string = tokenizer_subwords.decode(tokenized_string)
+print ('The original string: {}'.format(original_string))
+
+"""
+Tokenized string is [6307, 2327, 4043, 2120, 2, 48, 4249, 4429, 7, 2652, 8050]
+The original string: TensorFlow, from basics to mastery
+"""
