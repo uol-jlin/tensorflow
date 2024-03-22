@@ -114,3 +114,16 @@ for ts in tokenized_string:
 2652 ----> master
 8050 ----> y
 """
+
+BUFFER_SIZE = 10000
+BATCH_SIZE = 64
+
+# Get the train and test splits
+train_data, test_data = imdb_subwords['train'], imdb_subwords['test'], 
+
+# Shuffle the training data
+train_dataset = train_data.shuffle(BUFFER_SIZE)
+
+# Batch and pad the datasets to the maximum length of the sequences
+train_dataset = train_dataset.padded_batch(BATCH_SIZE)
+test_dataset = test_data.padded_batch(BATCH_SIZE)
