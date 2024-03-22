@@ -127,3 +127,19 @@ train_dataset = train_data.shuffle(BUFFER_SIZE)
 # Batch and pad the datasets to the maximum length of the sequences
 train_dataset = train_dataset.padded_batch(BATCH_SIZE)
 test_dataset = test_data.padded_batch(BATCH_SIZE)
+
+import tensorflow as tf
+
+# Define dimensionality of the embedding
+embedding_dim = 64
+
+# Build the model
+model = tf.keras.Sequential([
+    tf.keras.layers.Embedding(tokenizer_subwords.vocab_size, embedding_dim),
+    tf.keras.layers.GlobalAveragePooling1D(),
+    tf.keras.layers.Dense(6, activation='relu'),
+    tf.keras.layers.Dense(1, activation='sigmoid')
+])
+
+# Print the model summary
+model.summary()
