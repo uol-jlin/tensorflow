@@ -96,3 +96,21 @@ print ('The original string: {}'.format(original_string))
 Tokenized string is [6307, 2327, 4043, 2120, 2, 48, 4249, 4429, 7, 2652, 8050]
 The original string: TensorFlow, from basics to mastery
 """
+
+# Show token to subword mapping:
+for ts in tokenized_string:
+  print ('{} ----> {}'.format(ts, tokenizer_subwords.decode([ts])))
+
+"""
+6307 ----> Ten
+2327 ----> sor
+4043 ----> Fl
+2120 ----> ow
+2 ----> , 
+48 ----> from 
+4249 ----> basi
+4429 ----> cs 
+7 ----> to 
+2652 ----> master
+8050 ----> y
+"""
