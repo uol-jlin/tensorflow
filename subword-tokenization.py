@@ -42,3 +42,14 @@ tokenizer_subwords = info_subwords.features['text'].encoder
 # Take 2 training examples and decode the text feature
 for example in imdb_subwords['train'].take(2):
   print(tokenizer_subwords.decode(example[0]))
+
+# Get the train set
+train_data = imdb_plaintext['train']
+
+# Initialize sentences list
+training_sentences = []
+
+# Loop over all training examples and save to the list
+for s,_ in train_data:
+  training_sentences.append(s.numpy().decode('utf8'))
+    
