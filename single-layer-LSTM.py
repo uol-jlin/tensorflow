@@ -18,3 +18,21 @@ train_dataset = train_data.shuffle(BUFFER_SIZE)
 # Batch and pad the datasets to the maximum length of the sequences
 train_dataset = train_dataset.padded_batch(BATCH_SIZE)
 test_dataset = test_data.padded_batch(BATCH_SIZE)
+
+import tensorflow as tf
+
+# Hyperparameters
+embedding_dim = 64
+lstm_dim = 64
+dense_dim = 64
+
+# Build the model
+model = tf.keras.Sequential([
+    tf.keras.layers.Embedding(tokenizer.vocab_size, embedding_dim),
+    tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(lstm_dim)),
+    tf.keras.layers.Dense(dense_dim, activation='relu'),
+    tf.keras.layers.Dense(1, activation='sigmoid')
+])
+
+# Print the model summary
+model.summary()
