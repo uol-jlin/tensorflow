@@ -59,3 +59,7 @@ Non-trainable params: 0 (0.00 Byte)
 
 # Set the training parameters
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+
+NUM_EPOCHS = 10
+
+history = model.fit(train_dataset, epochs=NUM_EPOCHS, validation_data=test_dataset)
