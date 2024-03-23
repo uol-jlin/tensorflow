@@ -132,3 +132,35 @@ def tokenize_labels(all_labels, split_labels):
         label_seq_np = np.array(label_tokenizer.texts_to_sequences(split_labels)) - 1
         
     return label_seq_np
+
+def create_model(num_words, embedding_dim, maxlen):
+    """
+    Creates a text classifier model
+    
+    Args:
+        num_words (int): size of the vocabulary for the Embedding layer input
+        embedding_dim (int): dimensionality of the Embedding layer output
+        maxlen (int): length of the input sequences
+    
+    Returns:
+        model (tf.keras Model): the text classifier model
+    """
+    
+    tf.random.set_seed(123)
+    
+    model = tf.keras.Sequential([ 
+        tf.keras.layers.Embedding(input_dim=num_words,output_dim=embedding_dim,input_length=maxlen),
+        tf.keras.layers.GlobalAveragePooling1D(),
+        tf.keras.layers.Dense(32, activation='relu'),
+        tf.keras.layers.Dense(5, activation='sigmoid')
+    ])
+    
+    model.compile(loss='sparse_categorical_crossentropy',
+                  optimizer='adam',
+                  metrics=['accuracy']) 
+
+    return model
+    
+model = create_model(NUM_WORDS, EMBEDDING_DIM, MAXLEN)
+
+history = model.fit(train_padded_seq, train_label_seq, epochs=30, validation_data=(val_padded_seq, val_label_seq))
