@@ -95,3 +95,22 @@ def fit_tokenizer(train_sentences, num_words, oov_token):
     tokenizer.fit_on_texts(train_sentences)
         
     return tokenizer
+
+def seq_and_pad(sentences, tokenizer, padding, maxlen):
+    """
+    Generates an array of token sequences and pads them to the same length
+    
+    Args:
+        sentences (list of string): list of sentences to tokenize and pad
+        tokenizer (object): Tokenizer instance containing the word-index dictionary
+        padding (string): type of padding to use
+        maxlen (int): maximum length of the token sequence
+    
+    Returns:
+        padded_sequences (array of int): tokenized sentences padded to the same length
+    """ 
+    
+    sequences = tokenizer.texts_to_sequences(sentences)
+        padded_sequences = pad_sequences(sequences, padding=padding, maxlen=maxlen)
+        
+    return padded_sequences
