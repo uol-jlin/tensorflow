@@ -55,3 +55,26 @@ def parse_data_from_file(filename):
 
     return sentences, labels
     
+def train_val_split(sentences, labels, training_split):
+    """
+    Splits the dataset into training and validation sets
+    
+    Args:
+        sentences (list of string): lower-cased sentences without stopwords
+        labels (list of string): list of labels
+        training split (float): proportion of the dataset to convert to include in the train set
+    
+    Returns:
+        train_sentences, validation_sentences, train_labels, validation_labels - lists containing the data splits
+    """
+    
+    train_size = int(training_split * len(sentences))
+
+    train_sentences = sentences[:train_size]
+    train_labels = labels[:train_size]
+
+    validation_sentences = sentences[train_size:]
+    validation_labels = labels[train_size:]
+        
+    return train_sentences, validation_sentences, train_labels, validation_labels
+    
