@@ -36,3 +36,23 @@ model = tf.keras.Sequential([
 
 # Print the model summary
 model.summary()
+
+"""
+Model: "sequential"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ embedding (Embedding)       (None, None, 64)          523840    
+                                                                 
+ bidirectional (Bidirection  (None, 128)               66048     
+ al)                                                             
+                                                                 
+ dense (Dense)               (None, 64)                8256      
+                                                                 
+ dense_1 (Dense)             (None, 1)                 65        
+                                                                 
+=================================================================
+Total params: 598209 (2.28 MB)
+Trainable params: 598209 (2.28 MB)
+Non-trainable params: 0 (0.00 Byte)
+"""
