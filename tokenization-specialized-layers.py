@@ -114,3 +114,21 @@ def seq_and_pad(sentences, tokenizer, padding, maxlen):
         padded_sequences = pad_sequences(sequences, padding=padding, maxlen=maxlen)
         
     return padded_sequences
+
+def tokenize_labels(all_labels, split_labels):
+    """
+    Tokenizes the labels
+    
+    Args:
+        all_labels (list of string): labels to generate the word-index from
+        split_labels (list of string): labels to tokenize
+    
+    Returns:
+        label_seq_np (array of int): tokenized labels
+    """
+    
+    label_tokenizer = Tokenizer()
+    label_seq = label_tokenizer.fit_on_texts(all_labels)
+        label_seq_np = np.array(label_tokenizer.texts_to_sequences(split_labels)) - 1
+        
+    return label_seq_np
