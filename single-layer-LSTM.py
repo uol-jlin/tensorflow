@@ -56,3 +56,6 @@ Total params: 598209 (2.28 MB)
 Trainable params: 598209 (2.28 MB)
 Non-trainable params: 0 (0.00 Byte)
 """
+
+# Set the training parameters
+model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
