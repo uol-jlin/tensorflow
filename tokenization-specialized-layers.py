@@ -77,4 +77,21 @@ def train_val_split(sentences, labels, training_split):
     validation_labels = labels[train_size:]
         
     return train_sentences, validation_sentences, train_labels, validation_labels
+
+def fit_tokenizer(train_sentences, num_words, oov_token):
+    """
+    Instantiates the Tokenizer class on the training sentences
     
+    Args:
+        train_sentences (list of string): lower-cased sentences without stopwords to be used for training
+        num_words (int) - number of words to keep when tokenizing
+        oov_token (string) - symbol for the out-of-vocabulary token
+    
+    Returns:
+        tokenizer (object): an instance of the Tokenizer class containing the word-index dictionary
+    """
+    
+    tokenizer = Tokenizer(num_words=num_words, oov_token=oov_token)
+    tokenizer.fit_on_texts(train_sentences)
+        
+    return tokenizer
